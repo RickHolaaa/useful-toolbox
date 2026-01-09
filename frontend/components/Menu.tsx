@@ -1,6 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
+import Link from "next/link";
 
 // Inject keyframe animation for smooth transitions
 if (typeof document !== "undefined") {
@@ -277,11 +278,17 @@ export default function Menu() {
           <div className="text-sm uppercase tracking-[0.2em] text-white/70">
             {selectedCategory} tools
           </div>
-          {currentTools.map((tool) => (
-            <div key={tool} className={baseButtonClass}>
-              <span className="text-lg font-medium">{tool}</span>
-            </div>
-          ))}
+          {currentTools.map((tool) => {
+            // Create slug from tool name for routing
+            const toolSlug = tool.toLowerCase().replace(/\s+/g, "-");
+            const href = `/${selectedCategory.toLowerCase()}-${toolSlug}`;
+
+            return (
+              <Link key={tool} href={href} className={baseButtonClass}>
+                <span className="text-lg font-medium">{tool}</span>
+              </Link>
+            );
+          })}
           <div className="flex gap-3 w-full max-w-xs justify-between">
             <div
               className={`${baseButtonClass} max-w-[48%]`}
