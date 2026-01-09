@@ -1,7 +1,8 @@
 "use client";
 
 export default function VideoBackground() {
-  const basePath = process.env.NODE_ENV === 'production' ? '/useful-toolbox' : '';
+  const isGitHubPages = process.env.GITHUB_ACTIONS === 'true';
+  const basePath = isGitHubPages ? '/useful-toolbox' : '';
   
   return (
     <div className="fixed inset-0 -z-10 overflow-hidden">
